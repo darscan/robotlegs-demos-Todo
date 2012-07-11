@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<s:DataRenderer 
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:views="robotlegs.bender.demos.todo.views.*"
+	>
+
+	<fx:Script>
+		<![CDATA[
+			import robotlegs.bender.demos.todo.models.TodoItem;
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<views:TodoPM id="todoPM"/>
+	</fx:Declarations>
+
+	<s:layout>
+		<s:HorizontalLayout 
+			paddingBottom="10"
+			paddingLeft="10"
+			paddingRight="10"
+			paddingTop="10"
+			verticalAlign="middle"
+			/>
+	</s:layout>
+
+	<s:states>
+		<s:State name="normal"/>
+		<s:State name="edit"/>
+	</s:states>
+
+	<s:CheckBox selected="@{data.done}"/>
+
+	<s:TextInput 
+		text="@{data.note}"
+		width="100%"
+		click.normal="setCurrentState('edit')"
+		focusOut="setCurrentState('normal')"
+		fontSize="24"
+		borderVisible.normal="false"
+		contentBackgroundAlpha.normal="0"
+		editable="false"
+		editable.edit="true"
+		enter="setCurrentState('normal')"
+        lineThrough="{data.done}"
+        alpha="{data.done ? 0.2 : 1}"
+		/>
+
+	<s:Button
+        id="closeButton"
+		label="X"
+		width="30"
+		click="todoPM.removeTodo(data as TodoItem)"
+		/>
+
+</s:DataRenderer>

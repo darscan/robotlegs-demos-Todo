@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<s:Group 
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:views="robotlegs.bender.demos.todo.views.*"
+	>
+
+	<fx:Declarations>
+		<views:TodoPM id="todoPM"/>
+	</fx:Declarations>
+
+	<s:VGroup 
+		width="550"
+		horizontalAlign="justify"
+		horizontalCenter="0"
+		paddingBottom="50"
+		paddingTop="50"
+		gap="0"
+		>
+
+		<s:Label 
+			text="todos"
+			color="0x4D4D4D"
+			fontSize="70"
+			fontWeight="bold"
+			paddingBottom="30"
+			textAlign="center"
+			alpha="0.3"
+			/>
+
+		<s:HGroup 
+			fontSize="24"
+			paddingBottom="10"
+			paddingLeft="10"
+			paddingRight="10"
+			paddingTop="10"
+			verticalAlign="middle"
+			>
+			<s:CheckBox 
+				selected="@{todoPM.allDone}"
+				visible="{todoPM.items.length > 0}"
+				/>
+			<s:Group width="100%">
+				<s:Label 
+					text="What needs to be done?"
+					width="100%"
+					paddingLeft="5"
+					paddingTop="5"
+					alpha="0.2"
+					visible="{!todoPM.currentNote}"
+					/>
+				<s:TextInput 
+					id="noteInput"
+					text="@{todoPM.currentNote}"
+					width="100%"
+					focusAlpha="0"
+					borderVisible="false"
+					contentBackgroundAlpha="0"
+					enter="todoPM.addTodo()"
+					/>
+			</s:Group>
+		</s:HGroup>
+
+		<s:DataGroup 
+			dataProvider="{todoPM.items}"
+			itemRenderer="robotlegs.bender.demos.todo.views.TodoItemRenderer"
+			>
+			<s:layout>
+				<s:VerticalLayout 
+					horizontalAlign="justify"
+					gap="0"
+					/>
+			</s:layout>
+		</s:DataGroup>
+
+		<s:HGroup 
+			paddingBottom="10"
+			paddingLeft="10"
+			paddingRight="10"
+			paddingTop="10"
+			visible="{todoPM.items.length > 0}"
+			>
+			<s:Label 
+				text="{todoPM.items.length - todoPM.doneItems.length} items left"
+				width="100%"
+				/>
+			<s:Button 
+				label="Clear completed ({todoPM.doneItems.length})"
+				click="todoPM.clearCompleted()"
+				visible="{todoPM.doneItems.length > 0}"
+				/>
+		</s:HGroup>
+
+	</s:VGroup>
+
+
+</s:Group>
