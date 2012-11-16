@@ -8,6 +8,8 @@
 package robotlegs.bender.demos.todo
 {
 	import org.swiftsuspenders.Injector;
+
+	import robotlegs.bender.demos.todo.models.TodoModel;
 	import robotlegs.bender.demos.todo.views.TodoItemRenderer;
 	import robotlegs.bender.demos.todo.views.TodoItemRendererMediator;
 	import robotlegs.bender.demos.todo.views.TodoMediator;
@@ -35,6 +37,7 @@ package robotlegs.bender.demos.todo
 
 		public function configure():void
 		{
+			injector.map(TodoModel).asSingleton();
 			injector.map(TodoPM).asSingleton();
 			mediatorMap.map(TodoView).toMediator(TodoMediator);
 			mediatorMap.map(TodoItemRenderer).toMediator(TodoItemRendererMediator);
